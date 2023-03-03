@@ -365,7 +365,7 @@ def order(request):
             return Response(serialized_order.data, status.HTTP_200_OK)
         else: # customer view
             if models.Order.objects.filter(user=request.user).exists():
-                order = models.Order.objects.get(user=request.user)
+                order = models.Order.objects.filter(user=request.user)
                 serialized_order = serializers.OrderSerializer(order)
                 return Response(serialized_order.data, status.HTTP_200_OK)
             else:
